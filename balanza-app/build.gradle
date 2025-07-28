@@ -15,3 +15,7 @@ springBoot {
         excludes = ['time']
     }
 }
+
+tasks.named("bootBuildImage") {
+    imageName = "ghcr.io/alexandernikiforov/balanza-app:${buildVersion}"
+}
