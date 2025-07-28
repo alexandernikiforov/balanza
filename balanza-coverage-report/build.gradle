@@ -1,0 +1,37 @@
+plugins {
+    id 'base'
+
+    id 'jacoco-report-aggregation'
+    id 'test-report-aggregation'
+}
+
+repositories {
+    mavenCentral()
+}
+
+// configure test aggregation
+dependencies {
+    jacocoAggregation project(':balanza-app')
+//    jacocoAggregation project(':cert-blues-acme')
+//    jacocoAggregation project(':cert-blues-certbot')
+//
+    testReportAggregation project(':balanza-app')
+//    testReportAggregation project(':cert-blues-acme')
+//    testReportAggregation project(':cert-blues-certbot')
+}
+
+reporting {
+    reports {
+        testCodeCoverageReport(JacocoCoverageReport) { JacocoCoverageReport report ->
+            report.testSuiteName = "test"
+        }
+        testAggregateTestReport(AggregateTestReport) { AggregateTestReport report ->
+            report.testSuiteName = "test"
+        }
+    }
+}
+
+tasks.check.dependsOn(
+        tasks.named('testCodeCoverageReport', JacocoReport), tasks.named('testAggregateTestReport', TestReport)
+)
+

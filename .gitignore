@@ -1,28 +1,15 @@
-# Angular specific
-/dist/
-/out-tsc/
-/tmp/
-/coverage/
-/e2e/test-output/
-/.angular/
-.angular/
+.idea/
+*.iml
 
-# Node modules and dependency files
-/node_modules/
-/package-lock.json
-/yarn.lock
+.gradle
+build/
+out/
 
-# Environment files
-/.env
+# Ignore Gradle GUI config
+gradle-app.setting
 
-# Angular CLI and build artefacts
-/.angular-cli.json
-/.ng/
+# Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
+!gradle-wrapper.jar
 
-# TypeScript cache
-*.tsbuildinfo
-
-# Logs
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+# Cache of project
+.gradletasknamecache

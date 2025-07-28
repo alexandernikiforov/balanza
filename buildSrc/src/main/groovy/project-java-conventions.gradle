@@ -1,0 +1,43 @@
+plugins {
+    id 'java'
+    id 'jacoco'
+}
+
+repositories {
+    mavenCentral()
+}
+
+java {
+    targetCompatibility = JavaVersion.VERSION_21
+    sourceCompatibility = JavaVersion.VERSION_21
+}
+
+compileJava {
+    // somehow this is needed by Spring Boot 3 to ensure
+    // that the properties can be used as parameters to other properties
+    options.compilerArgs += ['-parameters']
+    options.encoding = 'UTF-8'
+}
+
+test {
+    useJUnitPlatform()
+    finalizedBy tasks.jacocoTestReport
+}
+
+dependencies {
+    implementation platform(project(':balanza-platform'))
+    compileOnly platform(project(':balanza-platform'))
+    annotationProcessor platform(project(':balanza-platform'))
+
+    testImplementation platform(project(':balanza-platform'))
+    testCompileOnly platform(project(':balanza-platform'))
+    testAnnotationProcessor platform(project(':balanza-platform'))
+
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testImplementation 'org.assertj:assertj-core'
+    testImplementation 'org.mockito:mockito-core'
+
+    testCompileOnly 'org.slf4j:slf4j-api'
+    testRuntimeOnly 'ch.qos.logback:logback-classic'
+
+}
